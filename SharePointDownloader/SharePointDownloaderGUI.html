@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+
+<head>
+  <meta charset="utf-8">
+  <title>SharePoint File Downloader</title>
+
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+    <style>
+
+      h1 {
+        padding: 10px 0 5px 0;
+        margin: 15px 5px 5px 0;
+        font-size: 1.556em;
+        font-weight: normal;
+        color: #52617f;
+      }
+
+      label {
+      color: #313a49;
+      font-size: 1em;
+      margin: 2px 0px 2px 0;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+
+      fieldset {
+        border:none;
+      }
+  
+      body {
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      margin: 0 20px;
+    }
+  
+    select,
+    checkbox,
+    input {
+      margin-bottom: 5px !important;
+    }
+
+      .header-ruler {
+        background-color: #cccccc;
+        height: 1px;
+        border: 0 none;
+        flex-grow: 1;
+        margin-top: 0.625em;
+        margin-left: 10px;
+      }
+      .header-message {
+      color: #000;
+      font-weight: bold;
+      padding-bottom: 0px;
+      margin: 0px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    </style>
+
+<body>
+  <div class="header-message">
+    <div>XMSG("SharePoint File Downloader")</div>
+    <hr class="header-ruler"></hr>
+  </div>
+  <form>
+    <fieldset>
+      <section>
+        <label>XMSG("SharePoint URL to site:")</label>
+        <ayx data-ui-props='{type:"TextBox", widgetId:"Site", placeholder:"https://domain.sharepoint.com/sites/sitename"}' data-item-props="{dataName:'site'}"></ayx>
+
+        <label>XMSG("Documents folder:")</label>
+        <ayx data-ui-props='{type:"TextBox", widgetId:"docs", placeholder:"Shared Documents"}' data-item-props="{dataName:'docs'}"></ayx>
+
+        <label>XMSG("SharePoint version:")</label>
+        <ayx data-ui-props='{type:"DropDown", widgetId:"Version"}'  data-item-props="{dataName:'version'}"></ayx>
+
+        <label>XMSG("Username:")</label>
+        <ayx data-ui-props='{type:"TextBox", widgetId:"Username"}' data-item-props="{dataName:'username'}"></ayx>
+
+        <label>XMSG("Password:")</label> 
+        <ayx data-ui-props='{type:"TextBox", widgetId:"Password"}'></ayx>
+
+        <label>XMSG("File specification:")</label>
+        <ayx data-ui-props='{type:"TextBox", widgetId:"FileName", placeholder:"*.*"}' data-item-props="{dataName:'filespec'}"></ayx>
+        
+        <label>XMSG("Save location:")</label>
+        <ayx data-ui-props='{type:"FileBrowse", widgetId:"Save", browseType:"Folder"}' data-item-props="{dataName:'save_path'}"></ayx>
+
+      </section>
+
+    </fieldset>
+  </form>
+
+  <script type="text/javascript">
+
+      Alteryx.Gui.BeforeLoad = function (manager, AlteryxDataItems, json) {
+
+        // Create password data item
+        var passwordDataItem = new AlteryxDataItems.SimpleString('password', {password: true, encryptionMode: 'machine'})
+        manager.addDataItem(passwordDataItem)
+        // Bind to TextBox widget
+        manager.bindDataItemToWidget(passwordDataItem, 'Password')
+
+        // Dropdown version picker
+        var stringSelector = new AlteryxDataItems.StringSelector('version', {
+          optionList: [
+            {label: 'XMSG("2007")', value: "2007"},
+            {label: 'XMSG("2010")', value: "2010"},
+            {label: 'XMSG("2013")', value: "2013"},
+            {label: 'XMSG("2016")', value: "2016"},
+            {label: 'XMSG("Office 365")', value: "365"}
+
+          ]
+        })
+        manager.addDataItem(stringSelector)
+        manager.bindDataItemToWidget(stringSelector, 'Version') // Bind to widget
+
+      }
+
+  </script>
+</body>
+
+</html>

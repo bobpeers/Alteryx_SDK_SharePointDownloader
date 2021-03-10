@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<AlteryxJavaScriptPlugin>
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="SharePointDownloaderEngine.py" SDKVersion="10.1" />
+  <GuiSettings Html="SharePointDownloaderGUI.html" Icon="SharePointDownloader/SharePointDownloaderIcon.png" Help="https://github.com/bobpeers/Alteryx_SDK_SharePointDownloader" SDKVersion="10.1">
+    <OutputConnections>
+      <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label="O"/>
+    </OutputConnections>
+  </GuiSettings>
+  <Properties>
+    <MetaInfo>
+      <Name>SharePoint File Downloader</Name>
+      <Description>Downloads files from SharePoint sites.</Description>
+      <CategoryName>Connectors</CategoryName>
+      <SearchTags>sharepoint, files, download, site</SearchTags>
+      <ToolVersion>1.0</ToolVersion>
+      <Author>Bob Peers</Author>
+      <Company></Company>
+      <Copyright>2020</Copyright>
+    </MetaInfo>
+  </Properties>
+</AlteryxJavaScriptPlugin>
